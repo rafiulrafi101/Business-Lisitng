@@ -1,0 +1,17 @@
+node_modules
+/server/node_modules
+/client/node_modules
+dist
+/client/dist
+/server/coverage
+/client/coverage
+.env
+.env.*
+!.env.example
+/server/.env
+/client/.env
+.DS_Store
+*.log
+.vscode
+.idea
+npm-debug.log*

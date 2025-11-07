@@ -1,0 +1,23 @@
+const Category = require('../models/Category');
+const Location = require('../models/Location');
+
+const getCategories = async () => {
+  const categories = await Category.find().sort({ label: 1 }).lean();
+  return categories.map((category) => ({
+    ...category,
+    id: category._id.toString(),
+  }));
+};
+
+const getLocations = async () => {
+  const locations = await Location.find().sort({ city: 1, area: 1 }).lean();
+  return locations.map((location) => ({
+    ...location,
+    id: location._id.toString(),
+  }));
+};
+
+module.exports = {
+  getCategories,
+  getLocations,
+};
