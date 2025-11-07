@@ -1,0 +1,240 @@
+{
+  "info": {
+    "name": "Business Listing API",
+    "_postman_id": "4c8d5ad0-0000-4d3f-8f2e-collection",
+    "description": "Postman collection for the Business Listing MERN application.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"user123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"user123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Listings",
+      "item": [
+        {
+          "name": "List Listings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/listings?search=&category=&city=&area=&sort=newest&page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["listings"],
+              "query": [
+                { "key": "search", "value": "" },
+                { "key": "category", "value": "" },
+                { "key": "city", "value": "" },
+                { "key": "area", "value": "" },
+                { "key": "sort", "value": "newest" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sample Shop\",\n  \"category\": \"Market\",\n  \"location\": {\"city\": \"Metro City\", \"area\": \"Downtown\"},\n  \"shortDescription\": \"A friendly place for local goods.\",\n  \"description\": \"We provide high quality local produce and essentials.\",\n  \"phone\": \"555-0101\",\n  \"hours\": \"Daily 9am-7pm\",\n  \"imageUrl\": \"https://example.com/photo.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/listings",
+              "host": ["{{baseUrl}}"],
+              "path": ["listings"]
+            }
+          }
+        },
+        {
+          "name": "Get Listing",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/listings/{{listingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["listings", "{{listingId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Listing",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sample Shop Updated\",\n  \"category\": \"Market\",\n  \"location\": {\"city\": \"Metro City\", \"area\": \"Downtown\"},\n  \"shortDescription\": \"Updated summary.\",\n  \"description\": \"Updated details about the shop.\",\n  \"phone\": \"555-0101\",\n  \"hours\": \"Daily 8am-8pm\",\n  \"imageUrl\": \"https://example.com/photo.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/listings/{{listingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["listings", "{{listingId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Listing",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/listings/{{listingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["listings", "{{listingId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me"]
+            }
+          }
+        },
+        {
+          "name": "My Bookmarks",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/me/bookmarks",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "bookmarks"]
+            }
+          }
+        },
+        {
+          "name": "Toggle Bookmark",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/users/me/bookmarks/{{listingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "bookmarks", "{{listingId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Meta",
+      "item": [
+        {
+          "name": "Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/meta/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["meta", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Locations",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/meta/locations",
+              "host": ["{{baseUrl}}"],
+              "path": ["meta", "locations"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "stats"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": []
+}
