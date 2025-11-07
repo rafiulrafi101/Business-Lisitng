@@ -1,0 +1,355 @@
+{
+  "info": {
+    "name": "BizList API",
+    "description": "Complete API collection for the BizList Business Listing application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Listings",
+      "item": [
+        {
+          "name": "Get All Listings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings?page=1&limit=12&sort=newest",
+              "host": ["{{base_url}}"],
+              "path": ["listings"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "12"
+                },
+                {
+                  "key": "sort",
+                  "value": "newest"
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "city",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "area",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Listings by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings?category=Haircut",
+              "host": ["{{base_url}}"],
+              "path": ["listings"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Haircut"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Listings by Location",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings?city=New York&area=Manhattan",
+              "host": ["{{base_url}}"],
+              "path": ["listings"],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "New York"
+                },
+                {
+                  "key": "area",
+                  "value": "Manhattan"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Listing",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/:id",
+              "host": ["{{base_url}}"],
+              "path": ["listings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "LISTING_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get My Listings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/my-listings",
+              "host": ["{{base_url}}"],
+              "path": ["listings", "my-listings"]
+            }
+          }
+        },
+        {
+          "name": "Create Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Business\",\n  \"category\": \"Haircut\",\n  \"location\": {\n    \"city\": \"New York\",\n    \"area\": \"Manhattan\"\n  },\n  \"shortDescription\": \"A great new business\",\n  \"description\": \"Full description of the business with all the details...\",\n  \"phone\": \"(555) 123-4567\",\n  \"hours\": \"Mon-Fri 9AM-5PM\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/listings",
+              "host": ["{{base_url}}"],
+              "path": ["listings"]
+            }
+          }
+        },
+        {
+          "name": "Update Listing",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Business Name\",\n  \"shortDescription\": \"Updated short description\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/listings/:id",
+              "host": ["{{base_url}}"],
+              "path": ["listings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "LISTING_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Listing",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/listings/:id",
+              "host": ["{{base_url}}"],
+              "path": ["listings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "LISTING_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/me",
+              "host": ["{{base_url}}"],
+              "path": ["users", "me"]
+            }
+          }
+        },
+        {
+          "name": "Get My Bookmarks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/me/bookmarks",
+              "host": ["{{base_url}}"],
+              "path": ["users", "me", "bookmarks"]
+            }
+          }
+        },
+        {
+          "name": "Toggle Bookmark",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/me/bookmarks/:listingId",
+              "host": ["{{base_url}}"],
+              "path": ["users", "me", "bookmarks", ":listingId"],
+              "variable": [
+                {
+                  "key": "listingId",
+                  "value": "LISTING_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Meta",
+      "item": [
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/meta/categories",
+              "host": ["{{base_url}}"],
+              "path": ["meta", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Get Locations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/meta/locations",
+              "host": ["{{base_url}}"],
+              "path": ["meta", "locations"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/stats",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "stats"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
